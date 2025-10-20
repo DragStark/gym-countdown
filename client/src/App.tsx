@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { WorkoutCalendar } from "./WorkoutCalendar";
 import { GymTimer } from "./GymTimer";
 import { TargetWorkout } from "./TargetWorkout";
+import { mockExerciseSquats, mockWorkoutData } from "./mock";
 
 export default function GymPage() {
   const [completedDates, setCompletedDates] = useState<string[]>([]);
@@ -43,19 +44,19 @@ export default function GymPage() {
     <div className="min-h-screen flex flex-row items-start justify-center gap-6 bg-gray-50 dark:bg-gray-900 p-6">
       <div className="w-1/2 flex flex-col items-center">
         <WorkoutCalendar
-          completedDates={completedDates}
-          progressByDate={progressByDate}
+          workoutData={mockWorkoutData}
+        />
+        
+      </div>
+      <div className="w-1/2 flex flex-col justify-center">
+        <GymTimer
+          exercise={mockExerciseSquats}
+          onWorkoutComplete={handleWorkoutComplete}
         />
         <TargetWorkout
           todayProgress={progressByDate[today] || 0}
           targetSets={targetSets}
           onTargetChange={setTargetSets}
-        />
-      </div>
-      <div className="w-1/2 flex justify-center">
-        <GymTimer
-          totalSets={targetSets}
-          onWorkoutComplete={handleWorkoutComplete}
         />
       </div>
     </div>
